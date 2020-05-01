@@ -21,6 +21,15 @@ public class Customer {
     }
 
     String statement() {
+        double totalAmount = totalAmount();
+
+        int frequentRenterPoints = frequentRenterPoints(this.rentals);
+
+        StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
+        return result.toString();
+    }
+
+    private double totalAmount() {
         double totalAmount = 0d;
 
         Enumeration<Rental> rentals = this.rentals.elements();
@@ -29,11 +38,7 @@ public class Customer {
             totalAmount += determineAmount(each);
 
         }
-
-        int frequentRenterPoints = frequentRenterPoints(this.rentals);
-
-        StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
-        return result.toString();
+        return totalAmount;
     }
 
     private StringBuilder renderReceipt(double totalAmount, int frequentRenterPoints) {
