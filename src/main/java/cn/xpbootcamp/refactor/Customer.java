@@ -27,8 +27,6 @@ public class Customer {
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
-            //show figures for this rental
-            //determine amounts for each line
             double thisAmount = determineAmount(each);
             //add frequent renter points
             frequentRenterPoints++;
@@ -48,24 +46,24 @@ public class Customer {
         return result.toString();
     }
 
-    private double determineAmount(Rental each) {
-        double thisAmount = 0d;
-        switch (each.getMovie().getPriceCode()) {
+    private double determineAmount(final Rental rental) {
+        double result = 0d;
+        switch (rental.getMovie().getPriceCode()) {
             case Movie.HISTORY:
-                thisAmount += 2;
-                if (each.getDaysRented() > 2)
-                    thisAmount += (each.getDaysRented() - 2) * 1.5;
+                result += 2;
+                if (rental.getDaysRented() > 2)
+                    result += (rental.getDaysRented() - 2) * 1.5;
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += each.getDaysRented() * 3;
+                result += rental.getDaysRented() * 3;
                 break;
             case Movie.CAMPUS:
-                thisAmount += 1.5;
-                if (each.getDaysRented() > 3)
-                    thisAmount += (each.getDaysRented() - 3) * 1.5;
+                result += 1.5;
+                if (rental.getDaysRented() > 3)
+                    result += (rental.getDaysRented() - 3) * 1.5;
                 break;
         }
-        return thisAmount;
+        return result;
     }
 
 }
