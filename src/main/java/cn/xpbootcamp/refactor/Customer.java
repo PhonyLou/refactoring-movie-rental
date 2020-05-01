@@ -24,7 +24,7 @@ public class Customer {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
         Enumeration<Rental> rentals = this.rentals.elements();
-        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
+        StringBuilder result = rentRecordTitle(getName());
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
@@ -35,6 +35,10 @@ public class Customer {
 
         result.append(footerLines(totalAmount, frequentRenterPoints));
         return result.toString();
+    }
+
+    private StringBuilder rentRecordTitle(final String name) {
+        return new StringBuilder("Rental Record for " + name + "：\n");
     }
 
     private StringBuilder footerLines(double totalAmount, int frequentRenterPoints) {
