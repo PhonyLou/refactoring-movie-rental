@@ -23,8 +23,9 @@ public class Customer {
     String statement() {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
         StringBuilder result = rentRecordTitle(getName());
+
+        Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
