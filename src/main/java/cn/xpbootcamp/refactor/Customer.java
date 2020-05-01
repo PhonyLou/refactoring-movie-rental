@@ -31,16 +31,20 @@ public class Customer {
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
 
             //show figures for this rental
-            result.append("\t")
-                  .append(each.getMovie().getTitle())
-                  .append("\t")
-                  .append(determineAmount(each)).append("\n");
+            figures(result, each);
             totalAmount += determineAmount(each);
         }
         //add footer lines
         result.append("Amount owed is ").append(totalAmount).append("\n");
         result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
         return result.toString();
+    }
+
+    private void figures(StringBuilder result, Rental each) {
+        result.append("\t")
+              .append(each.getMovie().getTitle())
+              .append("\t")
+              .append(determineAmount(each)).append("\n");
     }
 
     private int increaseFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
