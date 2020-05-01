@@ -31,7 +31,7 @@ public class Customer {
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
 
             //show figures for this rental
-            figures(result, each);
+            result.append(figures(each));
             totalAmount += determineAmount(each);
         }
         //add footer lines
@@ -40,11 +40,13 @@ public class Customer {
         return result.toString();
     }
 
-    private void figures(StringBuilder result, Rental each) {
+    private StringBuilder figures(Rental each) {
+        StringBuilder result = new StringBuilder();
         result.append("\t")
               .append(each.getMovie().getTitle())
               .append("\t")
               .append(determineAmount(each)).append("\n");
+        return result;
     }
 
     private int increaseFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
