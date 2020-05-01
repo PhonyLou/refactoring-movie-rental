@@ -6,6 +6,11 @@ import java.util.Vector;
 public class Customer {
 
     private String name;
+
+    public Vector<Rental> getRentals() {
+        return rentals;
+    }
+
     private Vector<Rental> rentals = new Vector<>();
 
     Customer(String name) {
@@ -13,7 +18,7 @@ public class Customer {
     }
 
     void addRental(Rental rental) {
-        rentals.addElement(rental);
+        getRentals().addElement(rental);
     }
 
     public String getName() {
