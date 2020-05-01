@@ -22,15 +22,15 @@ public class Customer {
 
     String statement() {
         double totalAmount = 0d;
-        int frequentRenterPoints = 0;
 
         Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
-            frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
             totalAmount += determineAmount(each);
 
         }
+
+        int frequentRenterPoints = frequentRenterPoints(this.rentals);
 
         StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
         return result.toString();
@@ -61,10 +61,14 @@ public class Customer {
                 .append(amount).append("\n");
     }
 
-    private int increaseFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
-        int result = frequentRenterPoints + 1;
-        if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
-            result++;
+    private int frequentRenterPoints(final Vector<Rental> rentals) {
+        int result = 0;
+        for (Rental rental : rentals) {
+            result ++;
+            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
+                result++;
+        }
+
         return result;
     }
 
