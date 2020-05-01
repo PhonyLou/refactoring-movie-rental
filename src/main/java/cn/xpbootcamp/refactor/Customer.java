@@ -6,28 +6,29 @@ import java.util.Vector;
 public class Customer {
 
     private String name;
-
-    public Vector<Rental> getRentals() {
-        return rentals;
-    }
-
     private Vector<Rental> rentals = new Vector<>();
+
 
     Customer(String name) {
         this.name = name;
-    }
-
-    void addRental(Rental rental) {
-        getRentals().addElement(rental);
     }
 
     public String getName() {
         return name;
     }
 
+    public Vector<Rental> getRentals() {
+        return rentals;
+    }
+
+    void addRental(Rental rental) {
+        getRentals().addElement(rental);
+    }
+
+
     String statement() {
-        double totalAmount = totalAmount(this.rentals);
-        int frequentRenterPoints = frequentRenterPoints(this.rentals);
+        double totalAmount = totalAmount(getRentals());
+        int frequentRenterPoints = frequentRenterPoints(getRentals());
         StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
 
         return result.toString();
@@ -45,7 +46,7 @@ public class Customer {
 
     private StringBuilder renderReceipt(double totalAmount, int frequentRenterPoints) {
         StringBuilder result = title(getName());
-        this.rentals.forEach(r -> result.append(details(r.getMovie().getTitle(), determineAmount(r))));
+        getRentals().forEach(r -> result.append(details(r.getMovie().getTitle(), determineAmount(r))));
         result.append(footerLines(totalAmount, frequentRenterPoints));
         return result;
     }
