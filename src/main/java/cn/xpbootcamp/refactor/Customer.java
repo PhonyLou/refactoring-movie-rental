@@ -22,10 +22,9 @@ public class Customer {
 
     String statement() {
         double totalAmount = totalAmount(this.rentals);
-
         int frequentRenterPoints = frequentRenterPoints(this.rentals);
-
         StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
+
         return result.toString();
     }
 
@@ -67,7 +66,7 @@ public class Customer {
     private int frequentRenterPoints(final Vector<Rental> rentals) {
         int result = 0;
         for (Rental rental : rentals) {
-            result ++;
+            result++;
             if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
                 result++;
         }
