@@ -27,12 +27,10 @@ public class Customer {
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
-
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
-
-            //show figures for this rental
-            result.append(figures(each));
             totalAmount += determineAmount(each);
+
+            result.append(figures(each));
         }
         //add footer lines
         result.append("Amount owed is ").append(totalAmount).append("\n");
