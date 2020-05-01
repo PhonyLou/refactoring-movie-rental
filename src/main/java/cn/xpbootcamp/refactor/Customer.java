@@ -23,7 +23,6 @@ public class Customer {
     String statement() {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
-        StringBuilder result = title(getName());
 
         Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -31,9 +30,12 @@ public class Customer {
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
             totalAmount += determineAmount(each);
 
-            result.append(details(each.getMovie().getTitle(), determineAmount(each)));
         }
 
+        StringBuilder result = title(getName());
+        this.rentals.forEach(r -> {
+            result.append(details(r.getMovie().getTitle(), determineAmount(r)));
+        });
         result.append(footerLines(totalAmount, frequentRenterPoints));
         return result.toString();
     }
