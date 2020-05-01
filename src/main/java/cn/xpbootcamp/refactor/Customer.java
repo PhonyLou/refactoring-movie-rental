@@ -31,7 +31,7 @@ public class Customer {
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
             totalAmount += determineAmount(each);
 
-            result.append(details(each));
+            result.append(details(each.getMovie().getTitle(), determineAmount(each)));
         }
 
         result.append(footerLines(totalAmount, frequentRenterPoints));
@@ -48,12 +48,12 @@ public class Customer {
                 .append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
     }
 
-    private StringBuilder details(Rental rental) {
+    private StringBuilder details(final String movieTitle, final double amount) {
         return new StringBuilder()
                 .append("\t")
-                .append(rental.getMovie().getTitle())
+                .append(movieTitle)
                 .append("\t")
-                .append(determineAmount(rental)).append("\n");
+                .append(amount).append("\n");
     }
 
     private int increaseFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
