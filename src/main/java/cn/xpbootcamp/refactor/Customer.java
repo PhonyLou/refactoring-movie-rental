@@ -23,7 +23,7 @@ public class Customer {
     String statement() {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
-        StringBuilder result = rentRecordTitle(getName());
+        StringBuilder result = title(getName());
 
         Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -31,14 +31,14 @@ public class Customer {
             frequentRenterPoints = increaseFrequentRenterPoints(frequentRenterPoints, each);
             totalAmount += determineAmount(each);
 
-            result.append(figures(each));
+            result.append(details(each));
         }
 
         result.append(footerLines(totalAmount, frequentRenterPoints));
         return result.toString();
     }
 
-    private StringBuilder rentRecordTitle(final String name) {
+    private StringBuilder title(final String name) {
         return new StringBuilder("Rental Record for " + name + "：\n");
     }
 
@@ -48,7 +48,7 @@ public class Customer {
                 .append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
     }
 
-    private StringBuilder figures(Rental rental) {
+    private StringBuilder details(Rental rental) {
         return new StringBuilder()
                 .append("\t")
                 .append(rental.getMovie().getTitle())
