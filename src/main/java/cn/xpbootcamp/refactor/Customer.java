@@ -32,12 +32,15 @@ public class Customer {
 
         }
 
-        StringBuilder result = title(getName());
-        this.rentals.forEach(r -> {
-            result.append(details(r.getMovie().getTitle(), determineAmount(r)));
-        });
-        result.append(footerLines(totalAmount, frequentRenterPoints));
+        StringBuilder result = renderReceipt(totalAmount, frequentRenterPoints);
         return result.toString();
+    }
+
+    private StringBuilder renderReceipt(double totalAmount, int frequentRenterPoints) {
+        StringBuilder result = title(getName());
+        this.rentals.forEach(r -> result.append(details(r.getMovie().getTitle(), determineAmount(r))));
+        result.append(footerLines(totalAmount, frequentRenterPoints));
+        return result;
     }
 
     private StringBuilder title(final String name) {
