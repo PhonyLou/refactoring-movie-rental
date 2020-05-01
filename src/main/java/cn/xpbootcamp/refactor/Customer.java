@@ -33,9 +33,13 @@ public class Customer {
             result.append(figures(each));
         }
         //add footer lines
+        footerLines(totalAmount, frequentRenterPoints, result);
+        return result.toString();
+    }
+
+    private void footerLines(double totalAmount, int frequentRenterPoints, StringBuilder result) {
         result.append("Amount owed is ").append(totalAmount).append("\n");
         result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
-        return result.toString();
     }
 
     private StringBuilder figures(Rental each) {
