@@ -43,19 +43,17 @@ public class Customer {
     }
 
     private StringBuilder footerLines(double totalAmount, int frequentRenterPoints) {
-        StringBuilder result = new StringBuilder();
-        result.append("Amount owed is ").append(totalAmount).append("\n");
-        result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
-        return result;
+        return new StringBuilder()
+                .append("Amount owed is ").append(totalAmount).append("\n")
+                .append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
     }
 
-    private StringBuilder figures(Rental each) {
-        StringBuilder result = new StringBuilder();
-        result.append("\t")
-              .append(each.getMovie().getTitle())
-              .append("\t")
-              .append(determineAmount(each)).append("\n");
-        return result;
+    private StringBuilder figures(Rental rental) {
+        return new StringBuilder()
+                .append("\t")
+                .append(rental.getMovie().getTitle())
+                .append("\t")
+                .append(determineAmount(rental)).append("\n");
     }
 
     private int increaseFrequentRenterPoints(final int frequentRenterPoints, final Rental rental) {
